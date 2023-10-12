@@ -145,20 +145,23 @@ export default function App() {
                                 Reset
                             </button>
                             <div class="btn-group dropup">
-                                <button type="button" class="btn btn-secondary">
-                                    <i class="fa fa-floppy-o"></i>
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                >
+                                    <i className="fa fa-floppy-o"></i>
                                 </button>
                                 <button
                                     type="button"
-                                    class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
+                                    className="btn btn-secondary dropdown-toggle dropdown-toggle-split"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
                                 >
-                                    <span class="visually-hidden">
-                                        Toggle Dropdown
+                                    <span className="visually-hidden">
+                                        Toggle Dropup
                                     </span>
                                 </button>
-                                <ul class="dropdown-menu"></ul>
+                                <ul className="dropdown-menu"></ul>
                             </div>
                         </div>
                     </div>
