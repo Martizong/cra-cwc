@@ -144,7 +144,7 @@ export default function App() {
                             >
                                 Reset
                             </button>
-                            <div class="btn-group dropup">
+                            <div className="btn-group dropup">
                                 <button
                                     type="button"
                                     className="btn btn-secondary"
