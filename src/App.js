@@ -41,8 +41,12 @@ export default function App() {
         setResults(null)
     }
 
-    const openSaves = () => {
-        return
+    const handleSave = () => {
+        localStorage.setItem('testSave', JSON.stringify(results))
+    }
+
+    const handleLoad = () => {
+        setResults(JSON.parse(localStorage.getItem('testSave')))
     }
 
     const [input1, input2, input3, input4] = INPUTS.map((name) => (
@@ -144,25 +148,20 @@ export default function App() {
                             >
                                 Reset
                             </button>
-                            <div className="btn-group dropup">
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary"
-                                >
-                                    <i className="fa fa-floppy-o"></i>
-                                </button>
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary dropdown-toggle dropdown-toggle-split"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-                                    <span className="visually-hidden">
-                                        Toggle Dropup
-                                    </span>
-                                </button>
-                                <ul className="dropdown-menu"></ul>
-                            </div>
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                onClick={handleSave}
+                            >
+                                <i className="fa fa-floppy-o"></i>
+                            </button>
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                onClick={handleLoad}
+                            >
+                                <i className="fa fa-caret-square-o-down"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
