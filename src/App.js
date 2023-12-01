@@ -48,8 +48,12 @@ export default function App() {
     }
 
     const handleSave = (name) => {
-        const data = JSON.parse(localStorage.getItem(WEIGHT_CALCULATOR_DATA_KEY)) ?? []
-        localStorage.setItem(WEIGHT_CALCULATOR_DATA_KEY, JSON.stringify([...data, { name, weights }]))
+        const data =
+            JSON.parse(localStorage.getItem(WEIGHT_CALCULATOR_DATA_KEY)) ?? []
+        localStorage.setItem(
+            WEIGHT_CALCULATOR_DATA_KEY,
+            JSON.stringify([...data, { name, weights }])
+        )
         setSaveDialogOpen(false)
     }
 
@@ -65,8 +69,6 @@ export default function App() {
         setResults(getResults(values))
         setDataDialogOpen(false)
     }
-
-
 
     const [input1, input2, input3, input4] = INPUTS.map((name) => (
         <div key={name} className="input-group input-group-lg">
@@ -173,22 +175,35 @@ export default function App() {
                                     className="btn btn-secondary"
                                     onClick={() => setSaveDialogOpen(true)}
                                 >
-                                    <i className="fa fa-floppy-o"></i>
+                                    <i className="fa fa-download"></i>
                                 </button>
                                 <button
                                     type="button"
                                     className="btn btn-secondary"
                                     onClick={() => setDataDialogOpen(true)}
                                 >
-                                    <i className="fa fa-caret-square-o-down"></i>
+                                    <i className="fa fa-upload"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <SaveDialog open={saveDialogOpen} onClose={() => setSaveDialogOpen(false)} onSubmit={handleSave} />
-            <DataDialog open={dataDialogOpen} onClose={() => setDataDialogOpen(false)} onSubmit={handleLoad} data={JSON.parse(localStorage.getItem(WEIGHT_CALCULATOR_DATA_KEY)) ?? []}/>
+            <SaveDialog
+                open={saveDialogOpen}
+                onClose={() => setSaveDialogOpen(false)}
+                onSubmit={handleSave}
+            />
+            <DataDialog
+                open={dataDialogOpen}
+                onClose={() => setDataDialogOpen(false)}
+                onSubmit={handleLoad}
+                data={
+                    JSON.parse(
+                        localStorage.getItem(WEIGHT_CALCULATOR_DATA_KEY)
+                    ) ?? []
+                }
+            />
         </>
     )
 }
