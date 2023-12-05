@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 export function DataDialog({ open, onClose, onSubmit, data }) {
-    const [selected, setSelected] = useState(null)
+    const [selected, setSelected] = useState(undefined)
 
     const handleOnSubmit = (event) => {
         event.preventDefault() // TODO Marto reed why we do that with forms
@@ -18,13 +18,14 @@ export function DataDialog({ open, onClose, onSubmit, data }) {
         >
             <form onSubmit={handleOnSubmit} className="d-grid gap-3">
                 <div>
-                    <p className="form-label">Select name:</p>
+                    <p className="form-label text-light">Select name:</p>
                     <select
                         value={selected}
                         onChange={({ target: { value } }) => setSelected(value)}
                         className="form-select"
                         aria-label="Small select example"
                     >
+                        {/* <option value={undefined} style={{ display: 'none' }}/> */}
                         {data.map(({ name }) => (
                             <option key={name} value={name}>
                                 {name}
@@ -40,7 +41,7 @@ export function DataDialog({ open, onClose, onSubmit, data }) {
                     >
                         Cancel
                     </button>
-                    <button className="btn btn-secondary">Load</button>
+                    <button disabled={selected === undefined} className="btn btn-secondary">Load</button>
                 </div>
             </form>
         </dialog>

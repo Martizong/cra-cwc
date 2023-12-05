@@ -86,6 +86,10 @@ export default function App() {
         </div>
     ))
 
+    const data = JSON.parse(
+        localStorage.getItem(WEIGHT_CALCULATOR_DATA_KEY)
+    ) ?? []
+
     return (
         <>
             <div className="container">
@@ -171,6 +175,7 @@ export default function App() {
                                     Reset
                                 </button>
                                 <button
+                                    disabled={!results}
                                     type="button"
                                     className="btn btn-secondary"
                                     onClick={() => setSaveDialogOpen(true)}
@@ -178,11 +183,19 @@ export default function App() {
                                     <i className="fa fa-download"></i>
                                 </button>
                                 <button
+                                    disabled={!data.length}
                                     type="button"
                                     className="btn btn-secondary"
                                     onClick={() => setDataDialogOpen(true)}
                                 >
                                     <i className="fa fa-upload"></i>
+                                </button>
+                                <button
+                                    disabled
+                                    type="button"
+                                    className="btn btn-secondary"
+                                >
+                                    <i className="fa fa-trash"></i>
                                 </button>
                             </div>
                         </div>
@@ -198,11 +211,7 @@ export default function App() {
                 open={dataDialogOpen}
                 onClose={() => setDataDialogOpen(false)}
                 onSubmit={handleLoad}
-                data={
-                    JSON.parse(
-                        localStorage.getItem(WEIGHT_CALCULATOR_DATA_KEY)
-                    ) ?? []
-                }
+                data={data}
             />
         </>
     )

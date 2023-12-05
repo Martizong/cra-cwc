@@ -6,6 +6,7 @@ export function SaveDialog({ open, onClose, onSubmit }) {
     const handleOnSubmit = (event) => {
         event.preventDefault() // TODO Marto reed why we do that with forms
         onSubmit(name)
+        setName('')
     }
 
     // TODO make that look beautiful with bootstrap
@@ -18,7 +19,7 @@ export function SaveDialog({ open, onClose, onSubmit }) {
         >
             <form onSubmit={handleOnSubmit} className="d-grid gap-3">
                 <div>
-                    <p className="form-label">Add name:</p>
+                    <p className="form-label text-light">Add name:</p>
                     <input
                         className="form-control"
                         type="text"
