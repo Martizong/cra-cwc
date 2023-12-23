@@ -43,7 +43,6 @@ export default function App() {
         )
 
         setResults(getResults(values))
-        setSelected()
     }
 
     const handleReset = () => {
@@ -53,6 +52,7 @@ export default function App() {
     }
 
     const handleSave = (name) => {
+        handleCalculate()
         const data =
             JSON.parse(localStorage.getItem(WEIGHT_CALCULATOR_DATA_KEY)) ?? []
         localStorage.setItem(
@@ -114,7 +114,7 @@ export default function App() {
                 <div className="row justify-content-center">
                     <div className="col-sm-12 col-md-8 col-lg-7 col-xl-5">
                         <div className="c-container">
-                            <h1 className='text-light text-center' style={{ height: 35 }}>{selected}</h1>
+                            <h1 className='text-light text-center my-0' style={{ height: 35 }}>{selected}</h1>
                             <div className="inputs-container">
                                 {input1}
                                 {input2}
