@@ -31,7 +31,7 @@ input[type='number'] {
 
 .img-container {
     position: relative;
-    height: 55%;
+    height: 40%;
 }
 
 .img-container img {
@@ -53,7 +53,7 @@ input[type='number'] {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
     padding: 1rem;
 }
 
