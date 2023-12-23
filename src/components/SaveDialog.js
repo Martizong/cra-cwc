@@ -1,15 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-export function SaveDialog({ open, onClose, onSubmit }) {
+export default function SaveDialog({ open, onClose, onSubmit, selected }) {
     const [name, setName] = useState('')
 
     const handleOnSubmit = (event) => {
-        event.preventDefault() // TODO Marto reed why we do that with forms
+        event.preventDefault()
         onSubmit(name)
         setName('')
     }
 
-    // TODO make that look beautiful with bootstrap
+    useEffect(() => {
+        setName(selected)
+    }, [selected])
+
     return (
         <dialog
             open={open}
@@ -23,7 +26,7 @@ export function SaveDialog({ open, onClose, onSubmit }) {
                     <input
                         className="form-control"
                         type="text"
-                        value={name}
+                        value={name ?? ''}
                         onChange={({ target: { value } }) => setName(value)}
                     />
                 </div>

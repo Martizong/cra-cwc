@@ -3,8 +3,9 @@ import './App.css'
 import { getResults } from './utils'
 import car from './assets/car.svg'
 import Info from './components/Info'
-import { SaveDialog } from './components/SaveDialog'
-import { DataDialog } from './components/DataDialog'
+import SaveDialog from './components/SaveDialog'
+import DataDialog from './components/DataDialog'
+import DeleteDialog from './components/DeleteDialog'
 
 const INPUTS = ['fl', 'fr', 'rl', 'rr']
 
@@ -18,8 +19,10 @@ const WEIGHT_CALCULATOR_DATA_KEY = 'WEIGHT_CALCULATOR_DATA_KEY'
 export default function App() {
     const [weights, setWeights] = useState(INITIAL_WEIGHTS)
     const [results, setResults] = useState(null)
+    const [selected, setSelected] = useState()
     const [saveDialogOpen, setSaveDialogOpen] = useState(false)
     const [dataDialogOpen, setDataDialogOpen] = useState(false)
+    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
 
     const getHandleOnChange =
         (field) =>
@@ -34,17 +37,19 @@ export default function App() {
         const values = INPUTS.reduce(
             (acc, name) => ({
                 ...acc,
-                [name]: Number.parseFloat(weights[name]),
+                [name]: parseFloat(weights[name]),
             }),
             {}
         )
 
         setResults(getResults(values))
+        setSelected()
     }
 
     const handleReset = () => {
         setWeights(INITIAL_WEIGHTS)
         setResults(null)
+        setSelected()
     }
 
     const handleSave = (name) => {
@@ -52,9 +57,10 @@ export default function App() {
             JSON.parse(localStorage.getItem(WEIGHT_CALCULATOR_DATA_KEY)) ?? []
         localStorage.setItem(
             WEIGHT_CALCULATOR_DATA_KEY,
-            JSON.stringify([...data, { name, weights }])
+            JSON.stringify([...data.filter(item => item.name !== name), { name, weights }])
         )
         setSaveDialogOpen(false)
+        setSelected(name)
     }
 
     const handleLoad = (item) => {
@@ -67,7 +73,19 @@ export default function App() {
         )
         setWeights(item.weights)
         setResults(getResults(values))
+        setSelected(item.name)
         setDataDialogOpen(false)
+    }
+
+    const handleDelete = () => {
+        const data =
+            JSON.parse(localStorage.getItem(WEIGHT_CALCULATOR_DATA_KEY)) ?? []
+        localStorage.setItem(
+            WEIGHT_CALCULATOR_DATA_KEY,
+            JSON.stringify(data.filter(item => item.name !== selected))
+        )
+        handleReset()
+        setDeleteDialogOpen(false)
     }
 
     const [input1, input2, input3, input4] = INPUTS.map((name) => (
@@ -96,6 +114,7 @@ export default function App() {
                 <div className="row justify-content-center">
                     <div className="col-sm-12 col-md-8 col-lg-7 col-xl-5">
                         <div className="c-container">
+                            <h1 className='text-light text-center' style={{ height: 35 }}>{selected}</h1>
                             <div className="inputs-container">
                                 {input1}
                                 {input2}
@@ -161,6 +180,7 @@ export default function App() {
 
                             <div className="button-container">
                                 <button
+                                    disabled={Object.values(weights).some(weight => !Number.isFinite(parseFloat(weight)))}
                                     className="btn btn-primary"
                                     type="button"
                                     onClick={handleCalculate}
@@ -191,9 +211,10 @@ export default function App() {
                                     <i className="fa fa-upload"></i>
                                 </button>
                                 <button
-                                    disabled
+                                    disabled={!selected}
                                     type="button"
                                     className="btn btn-secondary"
+                                    onClick={() => setDeleteDialogOpen(true)}
                                 >
                                     <i className="fa fa-trash"></i>
                                 </button>
@@ -206,12 +227,18 @@ export default function App() {
                 open={saveDialogOpen}
                 onClose={() => setSaveDialogOpen(false)}
                 onSubmit={handleSave}
+                selected={selected}
             />
             <DataDialog
                 open={dataDialogOpen}
                 onClose={() => setDataDialogOpen(false)}
                 onSubmit={handleLoad}
                 data={data}
+            />
+            <DeleteDialog
+                open={deleteDialogOpen}
+                onClose={() => setDeleteDialogOpen(false)}
+                onDelete={handleDelete}
             />
         </>
     )

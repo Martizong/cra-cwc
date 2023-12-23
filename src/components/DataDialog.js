@@ -1,14 +1,13 @@
 import { useState } from 'react'
 
-export function DataDialog({ open, onClose, onSubmit, data }) {
+export default function DataDialog({ open, onClose, onSubmit, data }) {
     const [selected, setSelected] = useState(undefined)
 
     const handleOnSubmit = (event) => {
-        event.preventDefault() // TODO Marto reed why we do that with forms
+        event.preventDefault()
         onSubmit(data.find(({ name }) => name === selected))
     }
 
-    // TODO make that look beautiful with bootstrap
     return (
         <dialog
             open={open}
@@ -25,7 +24,7 @@ export function DataDialog({ open, onClose, onSubmit, data }) {
                         className="form-select"
                         aria-label="Small select example"
                     >
-                        {/* <option value={undefined} style={{ display: 'none' }}/> */}
+                        <option value={undefined} style={{ display: 'none' }}/>
                         {data.map(({ name }) => (
                             <option key={name} value={name}>
                                 {name}
