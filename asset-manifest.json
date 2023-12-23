@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/cra-cwc/static/css/main.1dc0dedf.css",
-    "main.js": "/cra-cwc/static/js/main.641bdb1b.js",
+    "main.css": "/cra-cwc/static/css/main.24fb0036.css",
+    "main.js": "/cra-cwc/static/js/main.85841714.js",
     "static/js/787.a4ca6889.chunk.js": "/cra-cwc/static/js/787.a4ca6889.chunk.js",
-    "static/media/car.svg": "/cra-cwc/static/media/car.05b8062b8ea3dcad07c64a6e84fd1bf5.svg",
+    "static/media/car.svg": "/cra-cwc/static/media/car.be1a3e8b99eaa8c1b3d47398b802eda2.svg",
     "index.html": "/cra-cwc/index.html",
-    "main.1dc0dedf.css.map": "/cra-cwc/static/css/main.1dc0dedf.css.map",
-    "main.641bdb1b.js.map": "/cra-cwc/static/js/main.641bdb1b.js.map",
+    "main.24fb0036.css.map": "/cra-cwc/static/css/main.24fb0036.css.map",
+    "main.85841714.js.map": "/cra-cwc/static/js/main.85841714.js.map",
     "787.a4ca6889.chunk.js.map": "/cra-cwc/static/js/787.a4ca6889.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1dc0dedf.css",
-    "static/js/main.641bdb1b.js"
+    "static/css/main.24fb0036.css",
+    "static/js/main.85841714.js"
   ]
 }
